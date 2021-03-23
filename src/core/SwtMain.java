@@ -66,7 +66,7 @@ public class SwtMain {
 		PassEngine pe=new PassEngine();
 		
 		shlSwtMain = new Shell();
-		shlSwtMain.setSize(211, 150);
+		shlSwtMain.setSize(216, 171);
 		shlSwtMain.setText("PassGen");
 		FormLayout fl_shlSwtMain = new FormLayout();
 		fl_shlSwtMain.marginBottom = 10;
@@ -99,6 +99,10 @@ public class SwtMain {
 		spnLength.setMaximum(128);
 		spnLength.setMinimum(16);
 		
+		Button btnIncluirEspacios = new Button(cmtLength, SWT.CHECK);
+		btnIncluirEspacios.setText("Incluir espacios");
+		new Label(cmtLength, SWT.NONE);
+		
 		Composite cmtBotones = new Composite(shlSwtMain, SWT.NONE);
 		cmtBotones.setLayout(new FillLayout(SWT.HORIZONTAL));
 		FormData fd_cmtBotones = new FormData();
@@ -110,7 +114,7 @@ public class SwtMain {
 		btnGenerar.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				store=pe.PassGen(spnLength.getSelection());
+				store=pe.PassGen(spnLength.getSelection(), btnIncluirEspacios.getSelection());
 				TextTransfer tt=TextTransfer.getInstance();
 				cb.setContents(new Object[] {store}, new Transfer[] {tt});
 				JOptionPane.showMessageDialog(null, "Contraseña copiada al portapapeles");
